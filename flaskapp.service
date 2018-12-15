@@ -1,0 +1,14 @@
+# /etc/systemd/system/flaskapp.service
+[Unit]
+Description=Instance of Flaskapp
+After=network.target
+
+[Service]
+User=user
+Group=nginx
+WorkingDirectory=/home/user/flaskapp
+Environment="PATH=/home/user/flaskapp/env/bin"
+ExecStart=/home/user/flaskapp/env/bin/gunicorn --workers 4 --bind 127.0.0.1:8000
+
+[Install]
+WantedBy=multi-user.target
